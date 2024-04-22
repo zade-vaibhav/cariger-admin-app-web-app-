@@ -102,6 +102,12 @@ form .input-box span.details{
  form input[type="radio"]{
    display: none;
  }
+ .errors {
+  color: red;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
  form .button{
    height: 45px;
    margin: 35px 0

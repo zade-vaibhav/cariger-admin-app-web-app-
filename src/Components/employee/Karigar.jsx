@@ -4,7 +4,7 @@ import axios from "axios"
 import "./karigar.css"
 import { Link } from 'react-router-dom'
 
-function Karigar() {
+function  Karigar() {
 
   const [kariger, setKariger] = useState([])
 
@@ -29,7 +29,7 @@ function Karigar() {
       <div className='karigar_container'>
       {
         kariger.map((ele,ind) => {
-         return <Laborcard key={ind} data={ele} />
+         return <Laborcard  key={ind} data={ele}  />
         })
       }
       </div>
