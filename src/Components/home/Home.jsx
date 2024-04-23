@@ -9,6 +9,7 @@ function Home() {
       <Link style={{color:"black",textDecoration:"none"}} to={`/new/karigar`}> <button className="message" type="button">Add Kariger +</button></Link>
       </div>
       <div className="home_section">
+        
       <div className="card">
             <div className="text">
                 <img src="https://img.freepik.com/premium-photo/labor-day-dedication-inspiring-dedicated-workaholics-labors-labor-day-photos-illustrations_978786-1270.jpg" alt=""/>

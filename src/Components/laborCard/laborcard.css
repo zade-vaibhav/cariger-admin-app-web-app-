@@ -207,4 +207,79 @@ h5 {
         height: 60px;
     }
 }
-/* Responsiveness:End */
+/* ...existing styles */
+
+.blacklist-button-container {
+  display: block;
+  margin-top: 10px;
+}
+
+.blacklist-button {
+  background-color: transparent;
+  color: black; /* Light red color */
+  border: 2px solid #ff5656; /* Light red boundary */
+  padding: 10px ;
+  border-radius: 6px;
+  cursor: pointer;
+  /* font-size: 16px; */
+  /* margin-right: 10px; */
+}
+
+.blacklist-button:hover {
+  background-color: #FFCCCC; /* Light red background on hover */
+  color: #FF0000; /* Light red text on hover */
+  cursor: pointer;
+}
+
+.blacklist-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  /* border: 1px solid #ccc; */
+  border-radius: 8px;
+  z-index: 1000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.blacklist-popup h3 {
+  margin-bottom: 15px;
+}
+
+.blacklist-popup input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+    border: none;
+    outline: none; 
+  }
+  
+
+.blacklist-popup button {
+  background: linear-gradient(45deg, blue, #CF9FFF);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.blacklist-popup button:hover {
+  background: linear-gradient(45deg, #0056b3, #9f7cff);
+}
+
+.blacklist-popup p {
+  margin-top: 10px;
+  color: green;
+}
+
+.blacklist-popup p.error {
+  margin-top: 10px;
+  color: red;
+}
