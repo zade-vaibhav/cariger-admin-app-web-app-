@@ -20,8 +20,8 @@ function Laborcard(data) {
           <p>4.5 ⭐</p>
         </div>
         <div className="text">
-          <p className="name">{!data.name ? data.fullName : data.name }</p>
-          <p className="job_title">{data.designation}</p>
+          <p className="name">{data.data.name}</p>
+          <p className="job_title">{data.data.designation}</p>
           <p className="job_discription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam atque, ipsam a amet laboriosam eligendi.</p>
         </div>
         <div className="icons">

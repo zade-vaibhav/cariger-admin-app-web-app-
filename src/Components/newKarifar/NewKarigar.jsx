@@ -15,35 +15,49 @@ const NewKarigar = () => {
     const [errors, setErrors] = useState({});
 
 
-    const validationSchema =Yup.object(
-        {
-            fullName : Yup.string().required("name is required"),
-            userName : Yup.string().required("userName is required"),
-            phoneNumber:Yup.string().matches(/^\d{12}$/,"Invalid Phone Number"),
-            address:Yup.string().required("Address is Required"),
-            password:Yup.string().required("Password is Required")
-            .min(8,"Password must be minimum 8 charachers")
+    const validationSchema = Yup.object({
+        name: Yup.string().required("name is required"),
+        userName: Yup.string().required("userName is required"),
+        phone: Yup.string().matches(/^\+\d{7}\s\d{5}$/, "Invalid Phone Number"), 
+        designation:Yup.string().required("designation is required"),
+        address: Yup.string().required("Address is Required"),
+        password: Yup.string()
+            .min(8, "Password must be minimum 8 characters")
             .required("Password is Required"),
-            gender:Yup.string().required("Gender is Required")
-        } 
-    )
+        gender: Yup.string().required("Gender is Required")
+    });
+
+    
+    
 
     const [formData,setFormData] =useState({
-        fullName:"",
+        name:"",
         userName:"",
-        phoneNumber:"",
+        phone:"",
+        designation:"",
         password:"",
         address:"",
         gender:""
 })
-const handlePhoneChange = (value) => {
-    
+
+
+const handlePhoneChange = (value, country, e) => {
+    // Remove non-digit characters and trim to first 12 digits if longer
+    let numericValue = value.replace(/\D/g, '').slice(0, 12);
+
+    // Apply custom formatting
+    if (numericValue.length > 7) {
+        numericValue = `+${numericValue.slice(0, 7)} ${numericValue.slice(7)}`;
+    } else {
+        numericValue = `+${numericValue}`;
+    }
+
     setFormData({
         ...formData,
-        phoneNumber: value
+        phone: numericValue
     });
-    console.log(formData)
 };
+
 const handleSubmit=async(e)=>{
     e.preventDefault()
     console.log(formData)
@@ -56,9 +70,10 @@ const handleSubmit=async(e)=>{
         if(res.status === 201){
             setOpenSnackbar(true);
             setFormData({         
-                fullName: "",
+                name: "",
                 userName: "",
-                phoneNumber: "",
+                designation:"",
+                phone: "",
                 password: "",
                 address: "",
                 gender: ""
@@ -67,13 +82,18 @@ const handleSubmit=async(e)=>{
         
 
     }catch(err){
-        console.log(err.inner)
-        const newErrors ={}
-        err.inner.forEach((error) => {
-            newErrors[error.path] = error.message;
-        });
-        setErrors(newErrors);
-        // console.log(err.inner.path)
+        if (err.inner && Array.isArray(err.inner)) {
+            console.log(err.inner);
+            const newErrors = {};
+            err.inner.forEach((error) => {
+                newErrors[error.path] = error.message;
+            });
+            setErrors(newErrors);
+        } else {
+            // General error handling if 'inner' is not available
+            console.log("An error occurred:", err.message || "Unknown error");
+            setErrors({ general: "An error occurred. Please try again." });
+        }
     }
 
 }
@@ -93,14 +113,14 @@ const handleChange =(e)=>{
     //     // Remove any non-digit characters from the phone number
     //     const formattedPhone = value.replace(/\D/g, '');
     //     // Format the phone number according to the desired format
-    //     let formattedPhoneNumber = '';
+    //     let formattedphone = '';
     //     if (formattedPhone.length > 7) {
-    //       formattedPhoneNumber += formattedPhone.slice(0, 7) + ' ';
-    //       formattedPhoneNumber += formattedPhone.slice(7);
+    //       formattedphone += formattedPhone.slice(0, 7) + ' ';
+    //       formattedphone += formattedPhone.slice(7);
     //     } else {
-    //       formattedPhoneNumber += formattedPhone.slice(0);
+    //       formattedphone += formattedPhone.slice(0);
     //     }
-    //     setPhone(`+${formattedPhoneNumber}`);
+    //     setPhone(+${formattedphone});
     //   };
 
     //   console.log(phone)
@@ -114,12 +134,12 @@ const handleChange =(e)=>{
                             <div className="input-box">
                                 <span className="details">Full Name</span>
                                 <input
-                                 value={formData.fullName}
+                                 value={formData.name}
                                   type="text" 
-                                  name="fullName"
+                                  name="name"
                                   onChange={handleChange}
                                   placeholder="Enter your name" required />
-                                  {errors.fullName && <div className='errors'> {errors.fullName}    </div>}
+                                  {errors.name && <div className='errors'> {errors.name}    </div>}
                             </div>
                             <div className="input-box">
                                 <span className="details">Username</span>
@@ -131,20 +151,30 @@ const handleChange =(e)=>{
                                 placeholder="Enter your username" required />
                                 {errors.Username && <div className='errors'> {errors.Username}    </div>}
                             </div>
+                            <div className="input-box">
+                                <span className="details">Designation</span>
+                                <input 
+                                  value={formData.designation}
+                                  onChange={handleChange}
+                                  name="designation"
+                                type="text" 
+                                placeholder="Enter your designation" required />
+                                {errors.designation && <div className='errors'> {errors.designation}    </div>}
+                            </div>
                            
                              <div className="input-box">
                                 <span className="details">Phone Number</span>
                                 <PhoneInput
                                     country={'in'} 
              
-                                    value={formData.phoneNumber}
+                                    value={formData.phone}
                                     onChange={handlePhoneChange}
-                                    name="phoneNumber"
+                                    name="phone"
                                     
                                     inputStyle={{ marginLeft:25,width: '90%' }} 
                                     placeholder="Enter phone number"
                                 />
-                                {errors.phoneNumber && <div className='errors'> {errors.phoneNumber}    </div>}
+                                {errors.phone && <div className='errors'> {errors.phone}    </div>}
                             </div>
                             <div className="input-box">
                                 <span className="details">Password</span>
