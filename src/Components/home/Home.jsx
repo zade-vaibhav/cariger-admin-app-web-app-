@@ -61,7 +61,9 @@ function Home({ user }) {
             </p>
           </div>
           <div className="links">
-          <button className="message" type="button">See All</button>
+          <Link style={{color:"black",textDecoration:"none"}} to={`/karigar`}>
+              <button className="message" type="button">See All</button>
+            </Link>
           </div>
         </div>
         
