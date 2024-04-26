@@ -1,9 +1,13 @@
+// Home.jsx
+
 import React, { useState } from 'react';
 import "./home.css";
 import { Link } from 'react-router-dom';
 import UserForm from '../UserForm/UserForm'; 
+import Footer from '../footer/footer';
+import Navbar from '../Navbar/Navbar';
 
-function Home() {
+function Home({ user }) {
   const [showForm, setShowForm] = useState(false);
 
   const handleEdit = () => {
@@ -16,6 +20,7 @@ function Home() {
 
   return (
     <div className='home'>
+      <Navbar/>
       <div className="home_hedder">
         <Link style={{color:"black",textDecoration:"none"}} to={`/new/karigar`}>
           <button className="message" type="button">Add Kariger</button>
@@ -64,11 +69,8 @@ function Home() {
         <div className="card">
           <div className="text">
             {/* <img src="https://example.com/user-image.jpg" alt="User"/> */}
-            <h3>User Name</h3>
-            <p>Location</p>
-            <p>
-              User description here...
-            </p>
+            <h3>{user.name}</h3> {/* Display user's name */}
+            <p>{user.location}</p> {/* Display user's location */}
           </div>
           <div className="message">
             <button className="link" onClick={handleEdit}>Edit</button>
@@ -87,6 +89,7 @@ function Home() {
         )}
         
       </div>
+      <Footer />
     </div>
   )
 }

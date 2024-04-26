@@ -16,8 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={
         <>
-        <Navbar/>
-        <Home/>
+        <Login/>
         </>
       }/>
         <Route path="/Karigar" element={

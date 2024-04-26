@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./laborcard.css";
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import Footer from '../footer/footer';
 
 function Laborcard(data) {
   const [showPopup, setShowPopup] = useState(false);
@@ -46,7 +47,7 @@ function Laborcard(data) {
             <p className="job_title">{data.data.designation}</p>
             <p className="job_discription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam atque, ipsam a amet laboriosam eligendi.</p>
           </div>
-          <div className="icons">
+          {/* <div className="icons">
             <button>
               <ion-icon name="logo-dribbble"></ion-icon>
             </button>
@@ -65,7 +66,7 @@ function Laborcard(data) {
             <button>
               <ion-icon name="logo-behance"></ion-icon>
             </button>
-          </div>
+          </div> */}
           <div className="button">
             <div>
               <Link 
@@ -88,23 +89,24 @@ function Laborcard(data) {
           </div>
           {/* Blacklist Popup */}
           {showPopup && (
-  <div className="blacklist-popup">
-    <h3>Blacklist User</h3>
-    <input 
-      type="text" 
-      name="userId"
-      value={blacklistData.userId}
-      onChange={handleChange}
-    />
-    <button onClick={handleBlacklist}>Blacklist</button>
-    {blacklistData.success && <p>User blacklisted successfully!</p>}
-    {blacklistData.error && <p className="error">Error: {blacklistData.error}</p>}
-    <button onClick={() => setShowPopup(false)}>Cancel</button>
-  </div>
-)}
-
+            <div className="blacklist-popup">
+              <h3>Blacklist User</h3>
+              <input 
+                type="text" 
+                name="userId"
+                value={blacklistData.userId}
+                onChange={handleChange}
+              />
+              <button onClick={handleBlacklist}>Blacklist</button>
+              {blacklistData.success && <p>User blacklisted successfully!</p>}
+              {blacklistData.error && <p className="error">Error: {blacklistData.error}</p>}
+              <button onClick={() => setShowPopup(false)}>Cancel</button>
+            </div>
+          )}
         </div>  
       </div>
+      {/* Footer */}
+      {/* <Footer /> */}
     </section>
   );
 }

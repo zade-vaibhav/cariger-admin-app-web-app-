@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
-import "./login.css";
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import "./login.css";
+import Home from '../home/Home';
 
 function Login() {
-
-  const [loggenIn,setLoggedIn] = useState(false)
-
   const [credentials, setCredentials] = useState({
     username: '',
     password: ''
   });
+  const navigate = useNavigate();  
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState({}); // State to store user information
 
-  const navigate = useNavigate();  // Hook for navigating
+  useEffect(() => {
+    // Check if user is already logged in
+    const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
+    if (isLoggedIn) {
+      navigate(Home); // Redirect to home page if already logged in
+    }
+  }, [navigate]);
 
-  // Update state with input field values
   const handleChange = (event) => {
     const { name, value } = event.target;
     setCredentials(prevState => ({
@@ -22,33 +28,38 @@ function Login() {
     }));
   };
 
-  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(credentials)
-
+    
     try {
-      const response = await fetch('http://localhost:4040/api/v1/auth/adminLogin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-      });
-      const data = await response.json();
-      console.log(response)
-
-      if (data.success) {
-        setLoggedIn(true)
-        navigate('/');  // Navigate to the home page on successful login
-      } else {
-        console.error('Login failed:', data.message);  
-      }
+      // Simulating login success
+      // Replace this with actual login logic
+      const userData = {
+        name: 'John Doe',
+        location: 'New York'
+      };
+      setUser(userData); // Set user data
+      setLoggedIn(true); // Update loggedIn state
+      localStorage.setItem('loggedIn', 'true'); // Set logged in status in localStorage
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
+  // Handle logout
+  const handleLogout = () => {
+    // Perform logout logic here, if any
+    setLoggedIn(false);
+    localStorage.setItem('loggedIn', 'false'); // Set logged out status in localStorage
+    navigate('/auth/login'); // Redirect to login page on logout
+  };
+
+  // Render the home screen if logged in
+  if (loggedIn) {
+    return <Home user={user} onLogout={handleLogout} />;
+  }
+
+  // Render the login form if not logged in
   return (
     <div className="center">
       <h1>Admin Login</h1>

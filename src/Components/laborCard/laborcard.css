@@ -114,6 +114,7 @@ button {
 .button .message {
   background: #ededed;
   border: 2px solid #000;
+  color: #000;
 }
 
 .button .connect {
@@ -217,7 +218,7 @@ h5 {
 .blacklist-button {
   background-color: transparent;
   color: black; /* Light red color */
-  border: 2px solid #ff5656; /* Light red boundary */
+  border: 2px solid #fb3333; /* Light red boundary */
   padding: 10px ;
   border-radius: 6px;
   cursor: pointer;
@@ -225,7 +226,7 @@ h5 {
   /* margin-right: 10px; */
 }
 
-.blacklist-button:hover {
+.button.blacklist-button:hover {
   background-color: #FFCCCC; /* Light red background on hover */
   color: #FF0000; /* Light red text on hover */
   cursor: pointer;
@@ -257,7 +258,6 @@ h5 {
     border: none;
     outline: none; 
   }
-
 
 .blacklist-popup button {
   background: linear-gradient(45deg, blue, #CF9FFF);
