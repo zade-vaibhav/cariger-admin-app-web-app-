@@ -1,25 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import "./login.css";
-import Home from '../home/Home';
+import { useNavigate } from 'react-router-dom';
 
-function Login() {
+function Login({ onLogin }) {
   const [credentials, setCredentials] = useState({
     username: '',
     password: ''
   });
-  const navigate = useNavigate();  
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState({}); // State to store user information
 
-  useEffect(() => {
-    // Check if user is already logged in
-    const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
-    if (isLoggedIn) {
-      navigate(Home); // Redirect to home page if already logged in
-    }
-  }, [navigate]);
+  const navigate = useNavigate();  // Hook for navigating
 
+  // Handle input change
   const handleChange = (event) => {
     const { name, value } = event.target;
     setCredentials(prevState => ({
@@ -28,43 +19,33 @@ function Login() {
     }));
   };
 
+  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+    console.log(credentials)
+
     try {
-      // Simulating login success
-      // Replace this with actual login logic
-      
-      // Get the username entered by the user from the credentials state
-      const { username } = credentials;
-      
-      const userData = {
-        name: username, // Use the entered username as the name
-        location: 'New York'
-      };
-      setUser(userData); // Set user data
-      setLoggedIn(true); // Update loggedIn state
-      localStorage.setItem('loggedIn', 'true'); // Set logged in status in localStorage
+      const response = await fetch('http://localhost:4040/api/v1/auth/adminLogin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(credentials)
+      });
+      const data = await response.json();
+      console.log(response)
+
+      if (data.success) {
+        onLogin(); // Call the onLogin function passed as prop
+        navigate('/');  // Navigate to the home page on successful login
+      } else {
+        console.error('Login failed:', data.message);  
+      }
     } catch (error) {
       console.error('Error:', error);
     }
   };
-  
 
-  // Handle logout
-  // const handleLogout = () => {
-  //   // Perform logout logic here, if any
-  //   setLoggedIn(false);
-  //   localStorage.setItem('loggedIn', 'false'); // Set logged out status in localStorage
-  //   navigate('/auth/login'); // Redirect to login page on logout
-  // };
-
-  // Render the home screen if logged in
-  if (loggedIn) {
-    return <Home user={user}  />;
-  }
-
-  // Render the login form if not logged in
   return (
     <div className="center">
       <h1>Admin Login</h1>

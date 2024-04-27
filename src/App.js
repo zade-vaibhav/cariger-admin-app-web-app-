@@ -1,3 +1,4 @@
+import React, { useState } from 'react'; // Import useState
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from './Components/Navbar/Navbar';
@@ -10,42 +11,48 @@ import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false); // Move useState inside the App component
+
+  // Function to handle login
+  const handleLogin = () => {
+    setLoggedIn(true);
+  };
+
+  // Function to handle logout
+  const handleLogout = () => {
+    setLoggedIn(false);
+  };
+
   return (
     <BrowserRouter>
-    
       <Routes>
         <Route path="/" element={
-        <>
-        <Login/>
-        </>
-      }/>
+          <>
+            <Navbar loggedIn={loggedIn} />
+            <Home/>
+          </>
+        }/>
         <Route path="/Karigar" element={
-        <>
-        <Navbar/>
-        <Karigar/>
-        </>
+          <>
+            <Navbar loggedIn={loggedIn}/>
+            <Karigar/>
+          </>
         }/>
         <Route path="/new/karigar" element={
-        <>
-        <Navbar/>
-        <NewKarigar/>
-        </>
-      }/>
+          <>
+            <Navbar loggedIn={loggedIn}/>
+            <NewKarigar/>
+          </>
+        }/>
         <Route path="/Karigar/:id" element={
-        <>
-        <Navbar/>
-        <Profile/>
-        </>
+          <>
+            <Navbar loggedIn={loggedIn}/>
+            <Profile/>
+          </>
         }/>
-        <Route path="/users" element={
-        <Users/>
-        }/>
-        <Route path="/auth/login" element={
-        <Login/>
-        }/>
-         <Route path="/auth/register" element={
-        <Register/>
-        }/>
+        <Route path="/users" element={<Users loggedIn={loggedIn}/>} />
+        <Route path="/auth/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/auth/register" element={<Register loggedIn={loggedIn}/>} />
       </Routes>
     </BrowserRouter>
   );

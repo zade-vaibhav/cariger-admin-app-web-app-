@@ -8,13 +8,32 @@
 }
 
 .home_hedder {
-    height: 10vh;
+    height: 40vh;
     width: 100%;
     background-color: #954a4a;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     padding: 0 20px;
+    flex-direction: column; /* Changed to column */
+}
+.ab{
+    font-size: 80px;
+    font-weight: bolder;
+    color: #fff;
+    margin-top: 20px;
+}
+.ab span {
+    background: linear-gradient(to right, #00a2ff, #b6a9f8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text_ab{
+    margin-top: 10px;
+    font-size: 20px;
+    margin-bottom: 30px;
+    font-weight: bold;
 }
 
 .home_hedder button {
@@ -52,7 +71,22 @@
     align-items: center;
     padding: 20px 0;
 }
-
+.images {
+    display: flex;
+  }
+  
+.images img {
+    width: 150px; /* Adjust the width as needed */
+    height: 150px; /* Adjust the height as needed */
+    margin-left: 10px; /* Adjust the margin as needed */
+    /* border-radius: 50px; */
+    
+  }
+.aa{
+    /* border-radius: 50px;/ */
+    border-bottom: 10px;
+    border-right: transparent;
+}
 .card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;

@@ -1,15 +1,9 @@
 import React from 'react';
 import "./navbar.css";
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import Login from '../Login/Login';
-function Navbar() {
-  const location = useLocation();
-  const navigate = useNavigate();
+import { Link, useLocation } from 'react-router-dom';
 
-  const handleLogout = () => {
-    // Perform logout logic here, if any
-    navigate(Login); // Redirect to login page on logout
-  };
+function Navbar({ loggedIn }) { // Receive loggedIn prop indicating user's login status
+  const location = useLocation();
 
   return (
     <div className='navbar'>
@@ -19,7 +13,12 @@ function Navbar() {
             <li><Link to={"/"} className={location.pathname === '/' ? 'active' : ''}>Home</Link></li>
             <li><Link to={"/Karigar"} className={location.pathname === '/Karigar' ? 'active' : ''}>Karigar</Link></li>
             <li><Link to={"/tutorial"} className={location.pathname === '/tutorial' ? 'active' : ''}>Tutorial</Link></li>
-            <li><a href="#" onClick={handleLogout}>Logout</a></li>
+            {/* Conditionally render login or logout link based on loggedIn prop */}
+            {loggedIn ? (
+              <li className='login_A'><Link to={"/auth/login"}>Logout</Link></li>
+            ) : (
+              <li className='login_A'><Link to={"/auth/login"}>Login</Link></li>
+            )}
         </ul>
       </div>
     </div>

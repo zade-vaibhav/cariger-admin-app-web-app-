@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./home.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import UserForm from '../UserForm/UserForm'; 
 import Footer from '../footer/footer';
 import Navbar from '../Navbar/Navbar';
+import img from '../../Assets/img5.jpg'
+import image from '../../Assets/img3.jpg'
+import imag from '../../Assets/img4.jpg'
+import Login from '../Login/Login';
 
 function Home({ user }) {
   const [showForm, setShowForm] = useState(false);
+  // const navigate = useNavigate();  
 
+  // // useEffect(() => {
+  // //   const isLoggedIn = localStorage.getItem('loggedIn') === 'false';
+  // //   if (isLoggedIn) {
+  // //     navigate(Login);
+  // //   }
+  // // }, []);
   const handleEdit = () => {
     setShowForm(true);
   };
@@ -18,11 +29,19 @@ function Home({ user }) {
 
   return (
     <div className='home'>
-      <Navbar/>
       <div className="home_hedder">
+        <p className='ab'>Add <span>Karigar</span></p>
+        <p className='text_ab'> Click 'Register' to join the session</p>
         <Link style={{color:"black",textDecoration:"none"}} to={`/new/karigar`}>
-          <button className="message" type="button">Add Kariger</button>
+          <button className="message" type="button">Register Now</button>
         </Link>
+        <div className="images">
+    {/* Add your images here */}
+    {/* <img className='aa' src={image} alt="Image 1" />
+    <img className='bb' src={img} alt="Image 2" />
+    <img className='cc' src={imag} alt="Image 3" /> */}
+    {/* Add more images as needed */}
+  </div>
       </div>
       <div className="home_section">
         
@@ -69,8 +88,8 @@ function Home({ user }) {
         <div className="card">
           <div className="text">
             {/* <img src="https://example.com/user-image.jpg" alt="User"/> */}
-            <h3>{user.name}</h3> {/* Display user's name */}
-            <p>{user.location}</p> {/* Display user's location */}
+            <h3>daniel</h3> {/* Display user's name */}
+            <p></p> {/* Display user's location */}
           </div>
           <div className="message">
             <button className="link" onClick={handleEdit}>Edit</button>
