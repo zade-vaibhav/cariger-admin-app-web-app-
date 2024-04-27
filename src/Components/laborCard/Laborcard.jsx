@@ -47,37 +47,23 @@ function Laborcard(data) {
             <p className="job_title">{data.data.designation}</p>
             <p className="job_discription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam atque, ipsam a amet laboriosam eligendi.</p>
           </div>
-          {/* <div className="icons">
-            <button>
-              <ion-icon name="logo-dribbble"></ion-icon>
-            </button>
-            <button>
-              <ion-icon name="logo-instagram"></ion-icon>
-            </button>
-            <button>
-              <ion-icon name="logo-twitter"></ion-icon>
-            </button>
-            <button>
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </button>
-            <button>
-              <ion-icon name="logo-facebook"></ion-icon>
-            </button>
-            <button>
-              <ion-icon name="logo-behance"></ion-icon>
-            </button>
-          </div> */}
+          
           <div className="button">
             <div>
-              <Link 
-                style={{color: "black", textDecoration: "none"}}
-                to={{
-                  pathname: `/karigar/${data._id}`,
-                  state: { detail: data } 
-                }}
-              >
-                <button className="message" type="button">Profile</button>
-              </Link>
+            <Link 
+  style={{color: "black", textDecoration: "none"}}
+  to={{
+    pathname: `/karigar/${data._id}`,
+    state: { 
+      detail: data,
+      name: data.data.name, // Pass name data
+      designation: data.data.designation // Pass designation data
+    } 
+  }}
+>
+  <button className="message" type="button">Profile</button>
+</Link>
+
             </div>
             <div>
               <button className="connect" type="button">Orders</button>

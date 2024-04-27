@@ -8,7 +8,7 @@ function Navbar() {
 
   const handleLogout = () => {
     // Perform logout logic here, if any
-    navigate('/auth/login'); // Redirect to login page on logout
+    navigate(Login); // Redirect to login page on logout
   };
 
   return (

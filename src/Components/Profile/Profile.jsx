@@ -8,6 +8,8 @@ import { close } from 'ionicons/icons';
 function Profile() {
     const location = useLocation();
     const dataa = location.state ? location.state.detail : null;
+    const name = location.state ? location.state.name : "";
+    const designation = location.state ? location.state.designation : "";
 
     const [formData, setFormdata] = useState({
         name: dataa ? dataa.name : "",
@@ -38,12 +40,13 @@ function Profile() {
 
     useEffect(() => {
         if (dataa) {
-            setFormdata(prevState => ({
-                ...prevState,
-                name: dataa.name,
-            }));
+          setFormdata(prevState => ({
+            ...prevState,
+            name: name,
+            designation: designation
+          }));
         }
-    }, [dataa]);
+      }, [dataa, name, designation]);
 
     return (
         <div className="profile_Container">
@@ -58,7 +61,7 @@ function Profile() {
                             <p>4.5 ⭐</p>
                         </div>
                         <div className="text">
-                            <p className="name">{formData.name}</p>
+                            <p className="name">{name}</p>
                             <p className="job_title">lavor</p>
                             <p className="job_discription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam atque, ipsam a amet laboriosam eligendi.</p>
                         </div>

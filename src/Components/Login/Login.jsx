@@ -34,8 +34,12 @@ function Login() {
     try {
       // Simulating login success
       // Replace this with actual login logic
+      
+      // Get the username entered by the user from the credentials state
+      const { username } = credentials;
+      
       const userData = {
-        name: 'John Doe',
+        name: username, // Use the entered username as the name
         location: 'New York'
       };
       setUser(userData); // Set user data
@@ -45,18 +49,19 @@ function Login() {
       console.error('Error:', error);
     }
   };
+  
 
   // Handle logout
-  const handleLogout = () => {
-    // Perform logout logic here, if any
-    setLoggedIn(false);
-    localStorage.setItem('loggedIn', 'false'); // Set logged out status in localStorage
-    navigate('/auth/login'); // Redirect to login page on logout
-  };
+  // const handleLogout = () => {
+  //   // Perform logout logic here, if any
+  //   setLoggedIn(false);
+  //   localStorage.setItem('loggedIn', 'false'); // Set logged out status in localStorage
+  //   navigate('/auth/login'); // Redirect to login page on logout
+  // };
 
   // Render the home screen if logged in
   if (loggedIn) {
-    return <Home user={user} onLogout={handleLogout} />;
+    return <Home user={user}  />;
   }
 
   // Render the login form if not logged in
