@@ -7,7 +7,7 @@ function Navbar({ loggedIn }) { // Receive loggedIn prop indicating user's login
 
   return (
     <div className='navbar'>
-      <div className="nav_logo">Carigar</div>
+      <div className="nav_logo">Karigar</div>
       <div className="menu">
         <ul className='menu_ul'>
             <li><Link to={"/"} className={location.pathname === '/' ? 'active' : ''}>Home</Link></li>
