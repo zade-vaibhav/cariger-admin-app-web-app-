@@ -3,11 +3,8 @@ import "./home.css";
 import { Link, useNavigate } from 'react-router-dom';
 import UserForm from '../UserForm/UserForm'; 
 import Footer from '../footer/footer';
-import Navbar from '../Navbar/Navbar';
-import img from '../../Assets/img5.jpg'
-import image from '../../Assets/img3.jpg'
 import imag from '../../Assets/img4.jpg'
-import Login from '../Login/Login';
+
 
 function Home({ user }) {
   const [showForm, setShowForm] = useState(false);
@@ -84,16 +81,22 @@ function Home({ user }) {
           </div>
         </div>
         
-        {/* User Card */}
         <div className="card">
           <div className="text">
-            {/* <img src="https://example.com/user-image.jpg" alt="User"/> */}
-            <h3>daniel</h3> {/* Display user's name */}
-            <p></p> {/* Display user's location */}
+            <img src={imag} alt=""/>
+            <h3>Bookings</h3>
+            <p>All Information</p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing 
+              elit, sed do eiusmod tempor incididunt ut labore 
+              et dolore magna aliqua. Ut enim ad minim veniam, 
+              quis nostrud exercitation ullamco laboris nisi ut.
+            </p>
           </div>
-          <div className="message">
-            <button className="link" onClick={handleEdit}>Edit</button>
-            <button className="link"onClick={() => setShowForm(true)}>Blacklist</button>
+          <div className="links">
+          <Link style={{color:"black",textDecoration:"none"}} to={`/booking-table`}>
+              <button className="message" type="button">See All</button>
+            </Link>
           </div>
         </div>
         
