@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "./laborcard.css";
 import { Link } from 'react-router-dom';
 import axios from "axios";
-import Footer from '../footer/footer';
+// import Footer from '../footer/footer';
 
 function Laborcard(data) {
   const [showPopup, setShowPopup] = useState(false);
@@ -22,15 +22,18 @@ function Laborcard(data) {
 
   const handleBlacklist = async () => {
     try {
-      const response = await axios.post("YOUR_API_ENDPOINT_HERE", {
-        userId: blacklistData.userId
-      });
+      //Add the correct API here
+      const response = await axios.post('http://localhost:4040/api/v1/auth/users/blacklistlabour/' + data._id);
+      console.log(response.data)
+      console.log(response.data._id)
+      console.log(response.data.blacklistData)
       setBlacklistData({ userId: "", success: true, error: "" });
       setShowPopup(false);
     } catch (error) {
       setBlacklistData({ ...blacklistData, error: error.message });
     }
   };
+  
   
   return (
     <section>
@@ -76,13 +79,13 @@ function Laborcard(data) {
           {/* Blacklist Popup */}
           {showPopup && (
             <div className="blacklist-popup">
-              <h3>Blacklist User</h3>
-              <input 
+              <h3>Are you sure you want to Blacklist the User?</h3>
+              {/* <input 
                 type="text" 
                 name="userId"
                 value={blacklistData.userId}
                 onChange={handleChange}
-              />
+              /> */}
               <button onClick={handleBlacklist}>Blacklist</button>
               {blacklistData.success && <p>User blacklisted successfully!</p>}
               {blacklistData.error && <p className="error">Error: {blacklistData.error}</p>}
